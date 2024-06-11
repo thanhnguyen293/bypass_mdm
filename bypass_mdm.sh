@@ -13,7 +13,7 @@ select opt in "${options[@]}"; do
 	"Bypass on Recovery")
 		echo -e "${GRN}Bypass on Recovery"
 		if [ -d "/Volumes/Hackintosh HD - Data" ]; then
-   			diskutil rename "Hackintosh HD - Data" "Data"
+   			sudo diskutil rename "Hackintosh HD - Data" "Data"
 		fi
 		echo -e "${GRN}Tạo người dùng mới"
         echo -e "${BLU}Nhấn Enter để chuyển bước tiếp theo, có thể không điền sẽ tự động nhận giá trị mặc định"
@@ -29,26 +29,26 @@ select opt in "${options[@]}"; do
 		dscl_path='/Volumes/Data/private/var/db/dslocal/nodes/Default' 
         echo -e "${GREEN}Đang tạo user"
   		# Create user
-    	dscl -f "$dscl_path" localhost -create "/Local/Default/Users/$username"
-      	dscl -f "$dscl_path" localhost -create "/Local/Default/Users/$username" UserShell "/bin/zsh"
-	    dscl -f "$dscl_path" localhost -create "/Local/Default/Users/$username" RealName "$realName"
-	 	dscl -f "$dscl_path" localhost -create "/Local/Default/Users/$username" RealName "$realName"
-	    dscl -f "$dscl_path" localhost -create "/Local/Default/Users/$username" UniqueID "501"
-	    dscl -f "$dscl_path" localhost -create "/Local/Default/Users/$username" PrimaryGroupID "20"
+    	sudo dscl -f "$dscl_path" localhost -create "/Local/Default/Users/$username"
+      	sudo dscl -f "$dscl_path" localhost -create "/Local/Default/Users/$username" UserShell "/bin/zsh"
+	    sudo dscl -f "$dscl_path" localhost -create "/Local/Default/Users/$username" RealName "$realName"
+	 	sudo dscl -f "$dscl_path" localhost -create "/Local/Default/Users/$username" RealName "$realName"
+	    sudo dscl -f "$dscl_path" localhost -create "/Local/Default/Users/$username" UniqueID "501"
+	    sudo dscl -f "$dscl_path" localhost -create "/Local/Default/Users/$username" PrimaryGroupID "20"
 		mkdir "/Volumes/Data/Users/$username"
-	    dscl -f "$dscl_path" localhost -create "/Local/Default/Users/$username" NFSHomeDirectory "/Users/$username"
-	    dscl -f "$dscl_path" localhost -passwd "/Local/Default/Users/$username" "$passw"
-	    dscl -f "$dscl_path" localhost -append "/Local/Default/Groups/admin" GroupMembership $username
-		echo "0.0.0.0 deviceenrollment.apple.com" >>/Volumes/Macintosh\ HD/etc/hosts
-		echo "0.0.0.0 mdmenrollment.apple.com" >>/Volumes/Macintosh\ HD/etc/hosts
-		echo "0.0.0.0 iprofiles.apple.com" >>/Volumes/Macintosh\ HD/etc/hosts
+	    sudo dscl -f "$dscl_path" localhost -create "/Local/Default/Users/$username" NFSHomeDirectory "/Users/$username"
+	    sudo dscl -f "$dscl_path" localhost -passwd "/Local/Default/Users/$username" "$passw"
+	    sudo dscl -f "$dscl_path" localhost -append "/Local/Default/Groups/admin" GroupMembership $username
+		echo "0.0.0.0 deviceenrollment.apple.com" >>/Volumes/Hackintosh\ HD/etc/hosts
+		echo "0.0.0.0 mdmenrollment.apple.com" >>/Volumes/Hackintosh\ HD/etc/hosts
+		echo "0.0.0.0 iprofiles.apple.com" >>/Volumes/Hackintosh\ HD/etc/hosts
         echo -e "${GREEN}Chặn host thành công${NC}"
 		# echo "Remove config profile"
-  	touch /Volumes/Data/private/var/db/.AppleSetupDone
-        rm -rf /Volumes/Macintosh\ HD/var/db/ConfigurationProfiles/Settings/.cloudConfigHasActivationRecord
-	rm -rf /Volumes/Macintosh\ HD/var/db/ConfigurationProfiles/Settings/.cloudConfigRecordFound
-	touch /Volumes/Macintosh\ HD/var/db/ConfigurationProfiles/Settings/.cloudConfigProfileInstalled
-	touch /Volumes/Macintosh\ HD/var/db/ConfigurationProfiles/Settings/.cloudConfigRecordNotFound
+  	sudo touch /Volumes/Data/private/var/db/.AppleSetupDone
+        rm -rf /Volumes/Hackintosh\ HD/var/db/ConfigurationProfiles/Settings/.cloudConfigHasActivationRecord
+	sudo rm -rf /Volumes/Hackintosh\ HD/var/db/ConfigurationProfiles/Settings/.cloudConfigRecordFound
+	sudo touch /Volumes/Hackintosh\ HD/var/db/ConfigurationProfiles/Settings/.cloudConfigProfileInstalled
+	sudo touch /Volumes/Hackintosh\ HD/var/db/ConfigurationProfiles/Settings/.cloudConfigRecordNotFound
 		echo "----------------------"
 		break
 		;;
@@ -61,10 +61,10 @@ select opt in "${options[@]}"; do
         break
         ;;
     "Disable Notification (Recovery)")
-        rm -rf /Volumes/Macintosh\ HD/var/db/ConfigurationProfiles/Settings/.cloudConfigHasActivationRecord
-	rm -rf /Volumes/Macintosh\ HD/var/db/ConfigurationProfiles/Settings/.cloudConfigRecordFound
-	touch /Volumes/Macintosh\ HD/var/db/ConfigurationProfiles/Settings/.cloudConfigProfileInstalled
-	touch /Volumes/Macintosh\ HD/var/db/ConfigurationProfiles/Settings/.cloudConfigRecordNotFound
+        sudo rm -rf /Volumes/Hackintosh\ HD/var/db/ConfigurationProfiles/Settings/.cloudConfigHasActivationRecord
+	sudo rm -rf /Volumes/Hackintosh\ HD/var/db/ConfigurationProfiles/Settings/.cloudConfigRecordFound
+	sudo touch /Volumes/Hackintosh\ HD/var/db/ConfigurationProfiles/Settings/.cloudConfigProfileInstalled
+	sudo touch /Volumes/Hackintosh\ HD/var/db/ConfigurationProfiles/Settings/.cloudConfigRecordNotFound
 
         break
         ;;
