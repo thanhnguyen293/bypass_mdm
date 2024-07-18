@@ -12,8 +12,8 @@ select opt in "${options[@]}"; do
 	case $opt in
 	"Bypass on Recovery")
 		echo -e "${GRN}Bypass on Recovery"
-		if [ -d "/Volumes/Hackintosh HD - Data" ]; then
-   			sudo diskutil rename "Hackintosh HD - Data" "Data"
+		if [ -d "/Volumes/Mac - Data" ]; then
+   			sudo diskutil rename "Mac - Data" "Data"
 		fi
 		echo -e "${GRN}Tạo người dùng mới"
         echo -e "${BLU}Nhấn Enter để chuyển bước tiếp theo, có thể không điền sẽ tự động nhận giá trị mặc định"
@@ -39,16 +39,16 @@ select opt in "${options[@]}"; do
 	    sudo dscl -f "$dscl_path" localhost -create "/Local/Default/Users/$username" NFSHomeDirectory "/Users/$username"
 	    sudo dscl -f "$dscl_path" localhost -passwd "/Local/Default/Users/$username" "$passw"
 	    sudo dscl -f "$dscl_path" localhost -append "/Local/Default/Groups/admin" GroupMembership $username
-		echo "0.0.0.0 deviceenrollment.apple.com" >>/Volumes/Hackintosh\ HD/etc/hosts
-		echo "0.0.0.0 mdmenrollment.apple.com" >>/Volumes/Hackintosh\ HD/etc/hosts
-		echo "0.0.0.0 iprofiles.apple.com" >>/Volumes/Hackintosh\ HD/etc/hosts
+		echo "0.0.0.0 deviceenrollment.apple.com" >>/Volumes/Mac/etc/hosts
+		echo "0.0.0.0 mdmenrollment.apple.com" >>/Volumes/Mac/etc/hosts
+		echo "0.0.0.0 iprofiles.apple.com" >>/Volumes/Mac/etc/hosts
         echo -e "${GREEN}Chặn host thành công${NC}"
 		# echo "Remove config profile"
   	sudo touch /Volumes/Data/private/var/db/.AppleSetupDone
-        rm -rf /Volumes/Hackintosh\ HD/var/db/ConfigurationProfiles/Settings/.cloudConfigHasActivationRecord
-	sudo rm -rf /Volumes/Hackintosh\ HD/var/db/ConfigurationProfiles/Settings/.cloudConfigRecordFound
-	sudo touch /Volumes/Hackintosh\ HD/var/db/ConfigurationProfiles/Settings/.cloudConfigProfileInstalled
-	sudo touch /Volumes/Hackintosh\ HD/var/db/ConfigurationProfiles/Settings/.cloudConfigRecordNotFound
+        rm -rf /Volumes/Mac/var/db/ConfigurationProfiles/Settings/.cloudConfigHasActivationRecord
+	sudo rm -rf /Volumes/Mac/var/db/ConfigurationProfiles/Settings/.cloudConfigRecordFound
+	sudo touch /Volumes/Mac/var/db/ConfigurationProfiles/Settings/.cloudConfigProfileInstalled
+	sudo touch /Volumes/Mac/var/db/ConfigurationProfiles/Settings/.cloudConfigRecordNotFound
 		echo "----------------------"
 		break
 		;;
@@ -61,10 +61,10 @@ select opt in "${options[@]}"; do
         break
         ;;
     "Disable Notification (Recovery)")
-        sudo rm -rf /Volumes/Hackintosh\ HD/var/db/ConfigurationProfiles/Settings/.cloudConfigHasActivationRecord
-	sudo rm -rf /Volumes/Hackintosh\ HD/var/db/ConfigurationProfiles/Settings/.cloudConfigRecordFound
-	sudo touch /Volumes/Hackintosh\ HD/var/db/ConfigurationProfiles/Settings/.cloudConfigProfileInstalled
-	sudo touch /Volumes/Hackintosh\ HD/var/db/ConfigurationProfiles/Settings/.cloudConfigRecordNotFound
+        sudo rm -rf /Volumes/Mac/var/db/ConfigurationProfiles/Settings/.cloudConfigHasActivationRecord
+	sudo rm -rf /Volumes/Mac/var/db/ConfigurationProfiles/Settings/.cloudConfigRecordFound
+	sudo touch /Volumes/Mac/var/db/ConfigurationProfiles/Settings/.cloudConfigProfileInstalled
+	sudo touch /Volumes/Mac/var/db/ConfigurationProfiles/Settings/.cloudConfigRecordNotFound
 
         break
         ;;
